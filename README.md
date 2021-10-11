@@ -1,2 +1,2 @@
-# Lista dos exercício de lógica de programação
-Cada pasta é referente a uma lista de exercício do curso de lógica de programação do IFSP - Birigui
+# PROGRAMANDO EM C++
+Códigos do curso logica de progração / estrutura de dados com C++
