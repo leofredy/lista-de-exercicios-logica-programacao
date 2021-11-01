@@ -1,4 +1,6 @@
 #include <iostream>
+#include <malloc.h>
+
 using namespace std;
 
 struct Numero {
@@ -9,8 +11,12 @@ struct Pilha {
 	Numero *topo;
 };
 
-void criaPilha(Pilha *pilha) {
+Pilha* criaPilha() {
+	Pilha *pilha;
+	pilha = new Pilha;
 	pilha->topo = NULL;
+	
+	return pilha;
 }
 
 Numero* criaElemento() {
@@ -25,6 +31,11 @@ void inserir(Pilha *pilha, int valor) {
 	Elemento->proximo = pilha->topo;
 	pilha->topo = Elemento;
 }
+void remover(Pilha *pilha) {
+	Numero *topoAntigo = pilha->topo;
+	pilha->topo = pilha->topo->proximo;
+	free(topoAntigo);
+}
 void imprimir(Pilha *pilha, Numero *proximo) {
 	if (proximo) {
 		cout << "Valor: " << proximo->valor << endl;
@@ -34,10 +45,14 @@ void imprimir(Pilha *pilha, Numero *proximo) {
 }
 
 main() {
-	Pilha pilha;
-	criaPilha(&pilha);
-	inserir(&pilha, 1);
-	inserir(&pilha, 2);
-	inserir(&pilha, 3);
-	imprimir(&pilha, pilha.topo);
+	Pilha *pilha = criaPilha();
+	
+	inserir(pilha, 1);
+	inserir(pilha, 2);
+	inserir(pilha, 3);
+	imprimir(pilha, pilha->topo);
+	system("pause");
+	cout << "Removendo..." << endl;
+	remover(pilha);
+	imprimir(pilha, pilha->topo);
 }
